@@ -35,12 +35,7 @@
  */
 - (NSString *)diff_stringByAddingPercentEscapesForEncodeUriCompatibility;
 {
-  CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(NULL,
-                                  JX_BRIDGED_CAST(CFStringRef, self),
-                                  CFSTR(" !~*'();/?:@&=+$,#"),
-                                  NULL,
-                                  kCFStringEncodingUTF8);
-  return JX_TRANSFER_CF_TO_OBJC(NSString *, urlString);
+  return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 }
 
 /**
@@ -52,11 +47,7 @@
  */
 - (NSString *)diff_stringByReplacingPercentEscapesForEncodeUriCompatibility;
 {
-  CFStringRef decodedString = CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL, 
-                                            JX_BRIDGED_CAST(CFStringRef, self), 
-                                            CFSTR(""), 
-                                            kCFStringEncodingUTF8);
-  return JX_TRANSFER_CF_TO_OBJC(NSString *, decodedString);
+  return [self stringByRemovingPercentEncoding];
 }
 
 @end
