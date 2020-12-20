@@ -110,7 +110,7 @@ class TextDiffViewController: ToolViewController, NSTextViewDelegate {
       dmp.diff_cleanupSemantic(diff)
       return diff!
     }
-    
+/*
     if getDiffMode() == .words {
       let d3 = dmp.diff_wordsToChars(forFirstString: input1, andSecondString: input2)
       let diff = dmp.diff_main(ofOldString: (d3![0] as! String), andNewString: (d3![1] as! String))
@@ -124,7 +124,7 @@ class TextDiffViewController: ToolViewController, NSTextViewDelegate {
       dmp.diff_chars((diff as! [Any]), toLines: (d3![2] as! [Any]))
       return diff!
     }
-    
+*/
     log.error("invalid diff mode state")
     return []
   }

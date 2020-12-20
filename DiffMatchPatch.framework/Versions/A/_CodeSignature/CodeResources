@@ -15,39 +15,20 @@
 		</dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		H0gLm4ryJjWRddv0pPF7V6DkhgM=
+		VId1Gl4DAOPON9QqfJ1mZzKCQWQ=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/DiffMatchPatch.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			3HP9lODGYDRPwE1Vggqa7qYDZgo=
-			</data>
 			<key>hash2</key>
 			<data>
-			pHOalRUeOFeTkMTjB91T83tJfERpbfmRvSPXOaK4ViE=
-			</data>
-		</dict>
-		<key>Headers/DiffMatchPatchCFUtilities.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			M0S1zeQ421QvL/nYzDQeYLcVk1Q=
-			</data>
-			<key>hash2</key>
-			<data>
-			EruwZk1c5E6QMLAVcEhl87Rb226SEThD2llGoSJ/LP4=
+			VeXS1SpRfb9LXPNo91CXkuq/pjMs9YZ3E2Y/xNRLJt8=
 			</data>
 		</dict>
 		<key>Resources/English.lproj/InfoPlist.strings</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			MiLKDDnrUKr4EmuvhS5VQwxHGK8=
-			</data>
 			<key>hash2</key>
 			<data>
 			Oc8u4Ht7Mz58F50L9NeYpbcq9qTlhPUeZCcDu/pPyCg=
@@ -57,13 +38,9 @@
 		</dict>
 		<key>Resources/Info.plist</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			H0gLm4ryJjWRddv0pPF7V6DkhgM=
-			</data>
 			<key>hash2</key>
 			<data>
-			XM1dC1HYuNTcqMixkH15dGFzAYOUGGx6akR/xyshOPo=
+			bCk3JBIrexLeRLotMROvMXQCwD9p1jUp987Pol+PSr8=
 			</data>
 		</dict>
 	</dict>

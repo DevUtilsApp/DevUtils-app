@@ -1,8 +1,7 @@
 /*
  * Diff Match and Patch
- *
- * Copyright 2010 geheimwerk.de.
- * http://code.google.com/p/google-diff-match-patch/
+ * Copyright 2018 The diff-match-patch Authors.
+ * https://github.com/google/diff-match-patch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,12 +41,6 @@ typedef enum {
   DIFF_EQUAL = 3
 } Operation;
 
-typedef enum {
-  DiffWordTokens = 1,
-  DiffParagraphTokens = 2,
-  DiffSentenceTokens = 3,
-  DiffLineBreakDelimiteredTokens = 4
-} DiffTokenMode;
 
 /*
  * Class representing one diff operation.
@@ -77,7 +70,7 @@ typedef enum {
   NSUInteger length2;
 }
 
-@property (nonatomic, strong) NSMutableArray *diffs;
+@property (nonatomic, retain) NSMutableArray *diffs;
 @property (nonatomic, assign) NSUInteger start1;
 @property (nonatomic, assign) NSUInteger start2;
 @property (nonatomic, assign) NSUInteger length1;
@@ -85,13 +78,6 @@ typedef enum {
 
 @end
 
-#ifndef NS_RETURNS_RETAINED
-#if __has_feature(attribute_ns_returns_retained)
-#define NS_RETURNS_RETAINED __attribute__((ns_returns_retained))
-#else
-#define NS_RETURNS_RETAINED
-#endif
-#endif
 
 /*
  * Class containing the diff, match and patch methods.
@@ -144,7 +130,7 @@ typedef enum {
 - (NSString *)diff_prettyHtml:(NSMutableArray *)diffs;
 - (NSString *)diff_text1:(NSMutableArray *)diffs;
 - (NSString *)diff_text2:(NSMutableArray *)diffs;
-- (NSUInteger)diff_levenshtein:(NSArray *)diffs;
+- (NSUInteger)diff_levenshtein:(NSMutableArray *)diffs;
 - (NSString *)diff_toDelta:(NSMutableArray *)diffs;
 - (NSMutableArray *)diff_fromDeltaWithText:(NSString *)text1 andDelta:(NSString *)delta error:(NSError **)error;
 
@@ -155,7 +141,7 @@ typedef enum {
 - (NSMutableArray *)patch_makeFromDiffs:(NSMutableArray *)diffs;
 - (NSMutableArray *)patch_makeFromOldString:(NSString *)text1 newString:(NSString *)text2 diffs:(NSMutableArray *)diffs;
 - (NSMutableArray *)patch_makeFromOldString:(NSString *)text1 andDiffs:(NSMutableArray *)diffs;
-- (NSMutableArray *)patch_deepCopy:(NSArray *)patches NS_RETURNS_RETAINED; // Copy rule applies!
+- (NSMutableArray *)patch_deepCopy:(NSArray *)patches; // Copy rule applies!
 - (NSArray *)patch_apply:(NSArray *)sourcePatches toString:(NSString *)text;
 - (NSString *)patch_addPadding:(NSMutableArray *)patches;
 - (void)patch_splitMax:(NSMutableArray *)patches;
@@ -167,22 +153,11 @@ typedef enum {
 
 @interface DiffMatchPatch (PrivateMethods)
 
-+ (CFOptionFlags)tokenizerOptionsForMode:(DiffTokenMode)mode;
-
 - (NSMutableArray *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines deadline:(NSTimeInterval)deadline;
 - (NSMutableArray *)diff_computeFromOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines deadline:(NSTimeInterval)deadline;
 - (NSMutableArray *)diff_lineModeFromOldString:(NSString *)text1 andNewString:(NSString *)text2 deadline:(NSTimeInterval)deadline;
-- (NSArray *)diff_linesToCharsForFirstString:(NSString *)text1 andSecondString:(NSString *)text1;
-- (NSArray *)diff_tokensToCharsForFirstString:(NSString *)text1 andSecondString:(NSString *)text2 mode:(DiffTokenMode)mode;
-- (NSArray *)diff_wordsToCharsForFirstString:(NSString *)text1 andSecondString:(NSString *)text1;
-- (NSString *)diff_linesToCharsMungeOfText:(NSString *)text lineArray:(NSMutableArray *)lineArray lineHash:(NSMutableDictionary *)lineHash;
-- (NSString *)diff_wordsToCharsMungeOfText:(NSString *)text wordArray:(NSMutableArray *)wordArray wordHash:(NSMutableDictionary *)wordHash;
-- (NSString *)diff_sentencesToCharsMungeOfText:(NSString *)text sentenceArray:(NSMutableArray *)sentenceArray sentenceHash:(NSMutableDictionary *)sentenceHash;
-- (NSString *)diff_paragraphsToCharsMungeOfText:(NSString *)text paragraphArray:(NSMutableArray *)paragraphArray paragraphHash:(NSMutableDictionary *)paragraphHash;
-- (NSString *)diff_lineBreakDelimiteredToCharsMungeOfText:(NSString *)text lineArray:(NSMutableArray *)lineArray lineHash:(NSMutableDictionary *)lineHash;
-- (NSString *)diff_charsToTokenString:(NSString *)charsString usingTokens:(NSArray *)tokenArray;
-- (void)diff_chars:(NSArray *)diffs toLines:(NSArray *)lineArray;
-- (void)diff_chars:(NSArray *)diffs toTokens:(NSArray *)tokenArray;
+- (NSArray *)diff_linesToCharsForFirstString:(NSString *)text1 andSecondString:(NSString *)text2;
+- (void)diff_chars:(NSArray *)diffs toLines:(NSMutableArray *)lineArray;
 - (NSMutableArray *)diff_bisectOfOldString:(NSString *)text1 andNewString:(NSString *)text2 deadline:(NSTimeInterval)deadline;
 - (NSMutableArray *)diff_bisectSplitOfOldString:(NSString *)text1 andNewString:(NSString *)text2 x:(NSUInteger)x y:(NSUInteger)y deadline:(NSTimeInterval)deadline;
 - (NSUInteger)diff_commonOverlapOfFirstString:(NSString *)text1 andSecondString:(NSString *)text2;
